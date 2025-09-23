@@ -87,6 +87,13 @@ gallery.addEventListener("click", handleClick);
 
 function handleClick(event) {
   event.preventDefault();
-  const img = event.target.dataset.source;
-  console.log(img);
+  if (event.target.nodeName === "IMG") {
+    const largeImage = document.createElement("img");
+    largeImage.classList.add("gallery-large-image");
+    largeImage.src = event.target.dataset.source;
+    largeImage.alt = event.target.alt;
+    const instance = basicLightbox.create(largeImage.outerHTML);
+    instance.show();
+  }
+  return;
 }
